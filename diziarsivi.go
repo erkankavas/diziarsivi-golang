@@ -7,9 +7,9 @@ import (
 	"net/http"
 )
 
-type Show struct {
+type Article struct {
 	ID   string `json:"dizi_id"`
-	Name string `json:"dizi_isim"`
+	Title string `json:"dizi_isim"`
 }
 
 func main() {
@@ -20,13 +20,13 @@ func main() {
 	}
 	defer response.Body.Close()
 
-	var shows []Show
-	err = json.NewDecoder(response.Body).Decode(&shows)
+	var articles []Article
+	err = json.NewDecoder(response.Body).Decode(&articles)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	for _, show := range shows {
-		fmt.Printf("ID: %s\nName: %s\n\n", show.ID, show.Name)
+	for _, article := range articles {
+		fmt.Printf("%s\n", article.Title)
 	}
 }
